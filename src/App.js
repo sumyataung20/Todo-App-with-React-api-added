@@ -36,7 +36,7 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:8000/tasks");
+      const res = await fetch(`${api}/tasks`);
       const result = await res.json();
       setItems(result);
       console.log(result);
@@ -45,7 +45,7 @@ export default function App() {
   }, []);
 
   const toggle = (id) => {
-    fetch(`http://localhost:8000/tasks/${id}/toggle`, {
+    fetch(`${api}/tasks/${id}/toggle`, {
       method: "PUT",
     });
 
@@ -59,7 +59,7 @@ export default function App() {
 
   const clear = () => {
     setItems((items) => items.filter((item) => !item.done));
-    fetch("http://localhost:8000/tasks/", {
+    fetch(`${api}/tasks/`, {
       method: "DELETE",
     });
   };
@@ -71,7 +71,7 @@ export default function App() {
         return item;
       });
     });
-    fetch(`http://localhost:8000/tasks/${id}`, {
+    fetch(`${api}/tasks/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export default function App() {
 
   function add(subject) {
     (async () => {
-      const res = await fetch("http://localhost:8000/tasks", {
+      const res = await fetch(`${api}/tasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -96,7 +96,7 @@ export default function App() {
   }
 
   function remove(id) {
-    fetch(`http://localhost:8000/tasks/${id}`, {
+    fetch(`${api}/tasks/${id}`, {
       method: "DELETE",
     });
     setItems(items.filter((item) => item._id !== id));
